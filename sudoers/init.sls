@@ -3,6 +3,14 @@
 sudo:
   pkg.installed:
     - name: {{ pkgs.sudo }}
+  service:
+    - running
+    - enable: True
+    - reload: True
+    - require:
+      - pkg: sudo
+    - watch:
+      - file: /etc/sudoers
 
 /etc/sudoers:
   file.managed:
